@@ -1,0 +1,22 @@
+import grpc
+import comentarios_pb2
+import comentarios_pb2_grpc
+
+def run_client():
+    server_address = 'localhost:50059'
+
+    channel = grpc.insecure_channel(server_address)
+
+    client = comentarios_pb2_grpc.ComentariosServiceStub(channel)
+
+    respuesta_publicar = client.PublicarComentario(comentarios_pb2.Comentario(autor="Usuario3", contenido="¡Hola a todos!"))
+    print(f"Respuesta al publicar comentario: {respuesta_publicar.mensaje}")
+
+    consulta = comentarios_pb2.ConsultaComentarios(cantidad=5)
+    lista_comentarios = client.ObtenerComentarios(consulta)
+    print("Lista de comentarios:")
+    for comentario in lista_comentarios.comentarios:
+        print(f"Autor: {comentario.autor}, Contenido: {comentario.contenido}")
+
+if __name__ == '__main__':
+    run_client()
