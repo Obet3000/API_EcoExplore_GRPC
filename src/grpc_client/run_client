@@ -24,7 +24,7 @@ def run_client():
     client = comentarios_pb2_grpc.ComentariosServiceStub(channel)
 
     comentario = obtener_comentario(client, "65970a1d5583fb2411d6a44a")
-
+    
     if comentario:
         print(f"Evaluacion: {comentario.evaluacion}, Comentario: {comentario.comentario}")
     else:
