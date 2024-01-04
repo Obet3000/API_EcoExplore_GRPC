@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package Comentarios;
+
+service ComentariosService {
+  rpc PublicarComentario (Comentario) returns (Respuesta);
+
+  rpc ObtenerComentarios (ConsultaComentarios) returns (ListaComentarios);
+}
+message Comentario {
+  string autor = 1;
+  string contenido = 2;
+}
+
+message ConsultaComentarios {
+  int32 cantidad = 1;
+}
+
+message Respuesta {
+  bool exito = 1;
+  string mensaje = 2;
+}
+
+message ListaComentarios {
+  repeated Comentario comentarios = 1;
+}
