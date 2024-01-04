@@ -19,6 +19,11 @@ class ComentariosServiceStub(object):
                 request_serializer=comentarios__pb2.Comentario.SerializeToString,
                 response_deserializer=comentarios__pb2.Respuesta.FromString,
                 )
+        self.ObtenerComentario = channel.unary_unary(
+                '/Comentarios.ComentariosService/ObtenerComentario',
+                request_serializer=comentarios__pb2.ConsultaComentario.SerializeToString,
+                response_deserializer=comentarios__pb2.returnComentario.FromString,
+                )
         self.ObtenerComentarios = channel.unary_unary(
                 '/Comentarios.ComentariosService/ObtenerComentarios',
                 request_serializer=comentarios__pb2.ConsultaComentarios.SerializeToString,
@@ -30,6 +35,12 @@ class ComentariosServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def PublicarComentario(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ObtenerComentario(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -48,6 +59,11 @@ def add_ComentariosServiceServicer_to_server(servicer, server):
                     servicer.PublicarComentario,
                     request_deserializer=comentarios__pb2.Comentario.FromString,
                     response_serializer=comentarios__pb2.Respuesta.SerializeToString,
+            ),
+            'ObtenerComentario': grpc.unary_unary_rpc_method_handler(
+                    servicer.ObtenerComentario,
+                    request_deserializer=comentarios__pb2.ConsultaComentario.FromString,
+                    response_serializer=comentarios__pb2.returnComentario.SerializeToString,
             ),
             'ObtenerComentarios': grpc.unary_unary_rpc_method_handler(
                     servicer.ObtenerComentarios,
@@ -78,6 +94,23 @@ class ComentariosService(object):
         return grpc.experimental.unary_unary(request, target, '/Comentarios.ComentariosService/PublicarComentario',
             comentarios__pb2.Comentario.SerializeToString,
             comentarios__pb2.Respuesta.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ObtenerComentario(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Comentarios.ComentariosService/ObtenerComentario',
+            comentarios__pb2.ConsultaComentario.SerializeToString,
+            comentarios__pb2.returnComentario.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

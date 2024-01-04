@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11\x63omentarios.proto\x12\x0b\x43omentarios\".\n\nComentario\x12\r\n\x05\x61utor\x18\x01 \x01(\t\x12\x11\n\tcontenido\x18\x02 \x01(\t\"\'\n\x13\x43onsultaComentarios\x12\x10\n\x08\x63\x61ntidad\x18\x01 \x01(\x05\"+\n\tRespuesta\x12\r\n\x05\x65xito\x18\x01 \x01(\x08\x12\x0f\n\x07mensaje\x18\x02 \x01(\t\"@\n\x10ListaComentarios\x12,\n\x0b\x63omentarios\x18\x01 \x03(\x0b\x32\x17.Comentarios.Comentario2\xb2\x01\n\x12\x43omentariosService\x12\x45\n\x12PublicarComentario\x12\x17.Comentarios.Comentario\x1a\x16.Comentarios.Respuesta\x12U\n\x12ObtenerComentarios\x12 .Comentarios.ConsultaComentarios\x1a\x1d.Comentarios.ListaComentariosb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11\x63omentarios.proto\x12\x0b\x43omentarios\"4\n\nComentario\x12\x12\n\nevaluacion\x18\x01 \x01(\x05\x12\x12\n\ncomentario\x18\x02 \x01(\t\" \n\x12\x43onsultaComentario\x12\n\n\x02id\x18\x01 \x01(\t\"\'\n\x13\x43onsultaComentarios\x12\x10\n\x08\x63\x61ntidad\x18\x01 \x01(\x05\"+\n\tRespuesta\x12\r\n\x05\x65xito\x18\x01 \x01(\x08\x12\x0f\n\x07mensaje\x18\x02 \x01(\t\"?\n\x10returnComentario\x12+\n\ncomentario\x18\x01 \x03(\x0b\x32\x17.Comentarios.Comentario\"@\n\x10ListaComentarios\x12,\n\x0b\x63omentarios\x18\x01 \x03(\x0b\x32\x17.Comentarios.Comentario2\x87\x02\n\x12\x43omentariosService\x12\x45\n\x12PublicarComentario\x12\x17.Comentarios.Comentario\x1a\x16.Comentarios.Respuesta\x12S\n\x11ObtenerComentario\x12\x1f.Comentarios.ConsultaComentario\x1a\x1d.Comentarios.returnComentario\x12U\n\x12ObtenerComentarios\x12 .Comentarios.ConsultaComentarios\x1a\x1d.Comentarios.ListaComentariosb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,13 +22,17 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'comentarios_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _globals['_COMENTARIO']._serialized_start=34
-  _globals['_COMENTARIO']._serialized_end=80
-  _globals['_CONSULTACOMENTARIOS']._serialized_start=82
-  _globals['_CONSULTACOMENTARIOS']._serialized_end=121
-  _globals['_RESPUESTA']._serialized_start=123
-  _globals['_RESPUESTA']._serialized_end=166
-  _globals['_LISTACOMENTARIOS']._serialized_start=168
-  _globals['_LISTACOMENTARIOS']._serialized_end=232
-  _globals['_COMENTARIOSSERVICE']._serialized_start=235
-  _globals['_COMENTARIOSSERVICE']._serialized_end=413
+  _globals['_COMENTARIO']._serialized_end=86
+  _globals['_CONSULTACOMENTARIO']._serialized_start=88
+  _globals['_CONSULTACOMENTARIO']._serialized_end=120
+  _globals['_CONSULTACOMENTARIOS']._serialized_start=122
+  _globals['_CONSULTACOMENTARIOS']._serialized_end=161
+  _globals['_RESPUESTA']._serialized_start=163
+  _globals['_RESPUESTA']._serialized_end=206
+  _globals['_RETURNCOMENTARIO']._serialized_start=208
+  _globals['_RETURNCOMENTARIO']._serialized_end=271
+  _globals['_LISTACOMENTARIOS']._serialized_start=273
+  _globals['_LISTACOMENTARIOS']._serialized_end=337
+  _globals['_COMENTARIOSSERVICE']._serialized_start=340
+  _globals['_COMENTARIOSSERVICE']._serialized_end=603
 # @@protoc_insertion_point(module_scope)

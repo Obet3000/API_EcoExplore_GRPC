@@ -2,17 +2,21 @@ import grpc
 import comentarios_pb2
 import comentarios_pb2_grpc
 from concurrent import futures
+from documentdb.document_operation import getComentario
 
 class ComentariosService(comentarios_pb2_grpc.ComentariosServiceServicer):
-    def PublicarComentario(self, request, context):
-        return comentarios_pb2.Respuesta(exito=True, mensaje="Comentario publicado exitosamente")
 
-    def ObtenerComentarios(self, request, context):
-        comentarios = [
-            comentarios_pb2.Comentario(autor="Usuario1", contenido="¡Gran comentario!"),
-            comentarios_pb2.Comentario(autor="Usuario2", contenido="Otro comentario interesante"),
-        ]
-        return comentarios_pb2.ListaComentarios(comentarios=comentarios)
+    def ObtenerComentario(self, request, context):
+        comentario_id = request.id 
+        comentario = getComentario(comentario_id)
+        if comentario:
+            comentario_proto = comentarios_pb2.Comentario(
+                evaluacion=comentario.Evaluacion,
+                comentario=comentario.Comentario
+            )
+            return comentarios_pb2.returnComentario(comentario=[comentario_proto])
+        else:
+            return comentarios_pb2.returnComentario()
 
 def run_server():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

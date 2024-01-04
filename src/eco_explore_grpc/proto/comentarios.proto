@@ -4,12 +4,17 @@ package Comentarios;
 
 service ComentariosService {
   rpc PublicarComentario (Comentario) returns (Respuesta);
-
+  rpc ObtenerComentario (ConsultaComentario) returns (returnComentario); 
   rpc ObtenerComentarios (ConsultaComentarios) returns (ListaComentarios);
 }
+
 message Comentario {
-  string autor = 1;
-  string contenido = 2;
+  int32 evaluacion = 1;
+  string comentario = 2;
+}
+
+message ConsultaComentario {
+  string id = 1;
 }
 
 message ConsultaComentarios {
@@ -19,6 +24,10 @@ message ConsultaComentarios {
 message Respuesta {
   bool exito = 1;
   string mensaje = 2;
+}
+
+message returnComentario {
+  repeated Comentario comentario = 1;
 }
 
 message ListaComentarios {

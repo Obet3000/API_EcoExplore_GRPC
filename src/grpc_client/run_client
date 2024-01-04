@@ -2,6 +2,20 @@ import grpc
 import comentarios_pb2
 import comentarios_pb2_grpc
 
+def obtener_comentario(client, comentario_id):
+    try:
+        consulta = comentarios_pb2.ConsultaComentario(id=comentario_id)
+        obtener_comentario_respuesta = client.ObtenerComentario(consulta)
+
+        if obtener_comentario_respuesta.comentario:
+            comentario = obtener_comentario_respuesta.comentario[0]
+            return comentario
+        else:
+            return None
+    except grpc.RpcError as e:
+        print(f"Error de gRPC: {e.details()}")
+        return None
+
 def run_client():
     server_address = 'localhost:50059'
 
@@ -9,14 +23,12 @@ def run_client():
 
     client = comentarios_pb2_grpc.ComentariosServiceStub(channel)
 
-    respuesta_publicar = client.PublicarComentario(comentarios_pb2.Comentario(autor="Usuario3", contenido="¡Hola a todos!"))
-    print(f"Respuesta al publicar comentario: {respuesta_publicar.mensaje}")
+    comentario = obtener_comentario(client, "65970a1d5583fb2411d6a44a")
 
-    consulta = comentarios_pb2.ConsultaComentarios(cantidad=5)
-    lista_comentarios = client.ObtenerComentarios(consulta)
-    print("Lista de comentarios:")
-    for comentario in lista_comentarios.comentarios:
-        print(f"Autor: {comentario.autor}, Contenido: {comentario.contenido}")
+    if comentario:
+        print(f"Evaluacion: {comentario.evaluacion}, Comentario: {comentario.comentario}")
+    else:
+        print("Comentario no encontrado")
 
 if __name__ == '__main__':
     run_client()
